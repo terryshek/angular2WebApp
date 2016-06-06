@@ -4,12 +4,14 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashbroad.component';
 // service
 import {AppService} from "./service/app.service"
+import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap"
+
 
 
 @Component({
     selector: 'my-app',
     templateUrl: './app/template/nav.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective],
     providers: [
         ROUTER_PROVIDERS,
         AppService
@@ -33,9 +35,11 @@ import {AppService} from "./service/app.service"
 
 export class RouteComponent implements OnInit {
     title = 'ng2 blog';
-
+    public isCollapsed:boolean = false;
     constructor(public _router:Router){
-
+      this._router.subscribe((val) => {
+        this.isCollapsed = false;
+      })
     }
 
     ngOnInit(): any {

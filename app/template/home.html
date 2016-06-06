@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-lg-12 col-centered">
       <h1 class="page-header">Dashboard</h1>
-      <modal-demo></modal-demo>
       <div class="row placeholders">
         <div class="col-xs-6 col-sm-3 placeholder text-center">
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" style="display: inline-block"class="img-responsive img-circle" alt="Generic placeholder thumbnail">
@@ -25,14 +24,9 @@
           <span class="text-muted">Something else</span>
         </div>
       </div>
-
       <h2 class="sub-header">Section title</h2>
-      <alert type="info">Hello from ng2-bootstrap  {{ date.toDateString() }}</alert>
-      <div style="display:inline-block; min-height:290px;">
-        <datepicker [(ngModel)]="date" showWeeks="true"></datepicker>
-      </div>
       <div class="row">
-        <div class="col-md-8 col-xs-8">
+        <div class="col-md-6 col-xs-12">
           <div class="table-responsive">
             <table class="table  table-hover">
               <thead>
@@ -52,7 +46,7 @@
             </table>
           </div>
         </div>
-        <div class="col-md-4 col-xs-4">
+        <div class="col-md-6 col-xs-12">
           <user-detail [userProfile]="passingUser"></user-detail>
         </div>
       </div>

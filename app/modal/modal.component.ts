@@ -2,13 +2,12 @@ import {Component} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 
 // todo: change to ng2-bootstrap
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap';
-// webpack html imports
+import {MODAL_DIRECTVES} from 'ng2-bootstrap/ng2-bootstrap';
+
 @Component({
   selector: 'modal-demo',
   directives: [MODAL_DIRECTVES, CORE_DIRECTIVES],
-  viewProviders:[BS_VIEW_PROVIDERS],
-  templateUrl: './app/template/modal-demo.html'
+  templateUrl: "./app/modal/modal-demo.html"
 })
 export class ModalDemoComponent {
 
