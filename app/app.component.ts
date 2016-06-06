@@ -12,7 +12,7 @@ import {UserDetail} from "./userDetail";
   directives:[UserDetail]
 })
 export class AppComponent implements OnInit{
-  public passingUser:DataFormat = {username:"terry", age:"27"};
+  public passingUser:DataFormat = {username:"terry", age:27};
   public userList:DataFormat[];
   ngOnInit():any{
       this.getUser()

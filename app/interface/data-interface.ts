@@ -3,5 +3,5 @@
  */
 export interface DataFormat{
   username:string;
-  age:string;
+  age:number;
 }

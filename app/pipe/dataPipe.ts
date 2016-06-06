@@ -6,8 +6,7 @@ import {Pipe} from "@angular/core";
   name:"adder"
 })
 export class Adder {
-  
-  transform(value, arge){
+  transform(value:number){
     return value +1
   }
 }
