@@ -18,6 +18,12 @@
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+    "node_modules/ng2-bootstrap": {
+      "defaultExtension": "js"
+    },
+    "node_modules/moment": {
+      "defaultExtension": "js"
+    }
   };
 
   var ngPackageNames = [
@@ -49,7 +55,11 @@
 
   var config = {
     map: map,
-    packages: packages
+    packages: packages,
+    paths: {
+      "ng2-bootstrap/ng2-bootstrap":   "node_modules/ng2-bootstrap/ng2-bootstrap",
+      'moment': 'node_modules/moment/moment.js'
+    }
   }
 
   System.config(config);

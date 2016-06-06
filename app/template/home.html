@@ -27,6 +27,10 @@
       </div>
 
       <h2 class="sub-header">Section title</h2>
+      <alert type="info">Hello from ng2-bootstrap  {{ date.toDateString() }}</alert>
+      <div style="display:inline-block; min-height:290px;">
+        <datepicker [(ngModel)]="date" showWeeks="true"></datepicker>
+      </div>
       <div class="row">
         <div class="col-md-8 col-xs-8">
           <div class="table-responsive">
