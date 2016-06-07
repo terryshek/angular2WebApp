@@ -1,11 +1,12 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import {Http, Response} from '@angular/http';
 import {AppService} from "./service/app.service";
 import {DataFormat} from "./interface/data-interface";
 import {Adder} from "./pipe/dataPipe";
 import {UserDetail} from "./userDetail";
 import {ModalDemoComponent} from "./modal/modal.component";
 import {Observable} from 'rxjs/Rx';
+import {RouteParams, RouteData} from '@angular/router-deprecated';
+import { BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 
 interface food{
   name:string;
@@ -18,22 +19,27 @@ interface food{
   templateUrl: './app/template/home.html',
   pipes:[Adder],
   directives:[UserDetail, ModalDemoComponent],
+  viewProviders:[BS_VIEW_PROVIDERS]
 })
+
 export class AppComponent implements OnInit{
   public foods :food[];
   date: Date = new Date();
-  public passingUser:DataFormat = {username:"terry", age:27};
+  public passingUser:DataFormat;
   public userList:DataFormat[];
   public title:string;
+  public id:number;
 
-constructor(public  appService:AppService, private http: Http) {
-      console.log(name);
+  constructor(public  appService:AppService, private _params: RouteParams, public data: RouteData) {
       this.title = appService.titile;
+      console.log(this._params.get("id"))
+     this.passingUser = data.get('defaultData');
   }
 
   ngOnInit():any{
       this.getUser();
       this.getFoods();
+      console.log(this.passingUser)
 
   }
   getFoods() {
@@ -64,9 +70,4 @@ constructor(public  appService:AppService, private http: Http) {
       () => console.log('done loading foods')
     );
   }
-  directRoute(postName:DataFormat){
-    console.log(postName)
-    this.passingUser = postName
-  }
-
 }

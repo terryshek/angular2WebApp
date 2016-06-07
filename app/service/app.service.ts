@@ -13,6 +13,7 @@ export class AppService{
 
   getUsers() {
     return this.http.get('./app/data/users.json').map((res:Response) => res.json());
+
   }
 
   getFood(){
