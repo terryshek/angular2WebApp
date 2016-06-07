@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   public userList:DataFormat[];
   public title:string;
 
-constructor(public  appService:AppService, private http: Http, @Inject('name') name: any) {
+constructor(public  appService:AppService, private http: Http) {
       console.log(name);
       this.title = appService.titile;
   }

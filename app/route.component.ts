@@ -19,19 +19,10 @@ import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap"
 })
 @RouteConfig([
   {
-    path: '/main/:name',
+    path: '/main/',
     name: 'Main',
     component: AppComponent,
     useAsDefault: true,
-    defer: {
-      name: {
-        resolve: (params:RouteParams) => {
-          return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(params.get('name')), 2000);
-          });
-        }
-      }
-    }
   },
   {
       path: '/dashboard',
@@ -45,6 +36,7 @@ import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap"
 export class RouteComponent implements OnInit {
     title = 'ng2 blog';
     public isCollapsed:boolean = false;
+
     constructor(public _router:Router){
       this._router.subscribe((val) => {
         this.isCollapsed = false;
