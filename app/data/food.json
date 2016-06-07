@@ -1,6 +1,11 @@
-
 [
-  { "name": "Donuts" },
-  { "name": "Pizza" },
-  { "name": "Sushi" }
+  {
+    "name": "Donuts"
+  },
+  {
+    "name": "Pizza"
+  },
+  {
+    "name": "Sushi"
+  }
 ]

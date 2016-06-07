@@ -1,4 +1,4 @@
-import { RouteConfig, ROUTER_DIRECTIVES, Router, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { RouteConfig, ROUTER_DIRECTIVES, Router, ROUTER_PROVIDERS, RouteParams} from '@angular/router-deprecated';
 import {Component, OnInit} from '@angular/core';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashbroad.component';
@@ -18,17 +18,26 @@ import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap"
     ]
 })
 @RouteConfig([
-    {
-        path: '/main',
-        name: 'Main',
-        component: AppComponent,
-        useAsDefault:true
-    },
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: DashboardComponent
+  {
+    path: '/main/:name',
+    name: 'Main',
+    component: AppComponent,
+    useAsDefault: true,
+    defer: {
+      name: {
+        resolve: (params:RouteParams) => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => resolve(params.get('name')), 2000);
+          });
+        }
+      }
     }
+  },
+  {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: DashboardComponent
+  }
 
 ])
 
