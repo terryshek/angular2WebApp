@@ -12,6 +12,7 @@ import {
 import { UsernameValidator } from './validation/userValidator'
 
 @Component({
+  directives:[FORM_DIRECTIVES],
   selector: 'login-form',
   providers:[AuthService],
   template: `
@@ -23,12 +24,15 @@ import { UsernameValidator } from './validation/userValidator'
             <span class="input-group-addon" id="basic-addon1">@</span>
             <input type="text" class="form-control" ngControl="username" placeholder="Username" aria-describedby="basic-addon1" required>
         </div>
-        <div *ngIf="username.dirty && !username.valid && !username.pending">
-            <p *ngIf="username.errors.required">Username is required.</p>
+        <div *ngIf="username.dirty && !username.valid" class="alert alert-danger" style="margin: 5px">
+            <p *ngIf="username.errors.required"><strong>Username is required.</strong></p>
         </div>
          <div class="input-group pass">
            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-link"></i></span>
-            <input type="PASSWORD" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+            <input type="PASSWORD" class="form-control" ngControl="password" placeholder="Password" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="password.dirty && !password.valid" class="alert alert-danger" style="margin: 5px">
+            <p *ngIf="password.errors.required"><strong>Password is required.</strong></p>
         </div>
         <hr/>
         <button type="submit" (click)="submitData()" [disabled]="!form.valid"class="btn btn-default">Login</button>
@@ -46,14 +50,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private _service:AuthService, private _router: Router, private builder: FormBuilder) {
 
-    this.username = new Control(
-      "",
-      Validators.compose([Validators.required, UsernameValidator.startsWithNumber]),
-      UsernameValidator.usernameTaken
-    );
+
+    this.username = new Control('', Validators.required, UsernameValidator.checkIfAvailable);
+    this.password = new Control('', Validators.required);
 
     this.form = builder.group({
-      username:  this.username
+      username:  this.username,
+      password:  this.password
     });
   }
 
