@@ -1,10 +1,12 @@
-import { RouteConfig, ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
+import { RouteConfig, ROUTER_DIRECTIVES, Router, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {Component, OnInit} from '@angular/core';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashbroad.component';
+import { LoginComponent } from './login.component';
 // service
 import {AppService} from "./service/app.service"
-import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap"
+import {AuthService} from './service/loginService';
+import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap";
 
 
 
@@ -13,7 +15,9 @@ import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap"
     templateUrl: './app/template/nav.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective],
     providers: [
-        AppService
+      AppService,
+      AuthService,
+      ROUTER_PROVIDERS
     ]
 })
 @RouteConfig([
@@ -33,8 +37,16 @@ import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap"
       path: '/dashboard',
       name: 'Dashboard',
       component: DashboardComponent,
+  },
+  {
+      path: '/login',
+      name: 'Login',
+      component: LoginComponent,
       useAsDefault: true
-  }
+  },
+  {
+    path: '/*path',
+    redirectTo: ['Login']}
 
 ])
 

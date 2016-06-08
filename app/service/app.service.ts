@@ -20,11 +20,6 @@ export class AppService{
     return this.http.get('./app/data/food.json').map((res:Response) => res.json());
   }
 
-  private handleError(error: any) {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }
-
 }
 interface food{
   name:string;
