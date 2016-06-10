@@ -3,10 +3,10 @@ import {Http, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/operator/share';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class AuthService {
-  isLoggedin:Observable<boolean> = false;
 
   constructor(private _http:Http) {
 
@@ -20,15 +20,13 @@ export class AuthService {
     headers.append('Access-Control-Allow-Origin', '*');
 
     return new Promise((resolve) => {
-
       this._http.post('http://103.44.162.106:8337/login', creds, {headers: headers})
         .map(res => res.json())
         .subscribe((res) => {
           console.log(res)
           if(res.status == 200) {
             //console.log(data.json())
-            window.localStorage.setItem({'loginIn':true,'this_id': res.this_profile["_id"]});
-            this.isLoggedin = true;
+            Cookie.set('loginRecord', JSON.stringify({'loginIn':true,'this_id': res.this_profile["_id"]}), 10 /*days from now*/);
           }
           resolve(this.isLoggedin)
         },

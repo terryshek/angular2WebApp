@@ -10,7 +10,8 @@
 
     '@angular':                   'node_modules/@angular',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    'rxjs':                       'node_modules/rxjs'
+    'rxjs':                       'node_modules/rxjs',
+    'ng2-cookies':                'node_modules/ng2-cookies',
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -22,6 +23,9 @@
       "defaultExtension": "js"
     },
     "node_modules/moment": {
+      "defaultExtension": "js"
+    },
+    "node_modules/ng2-cookies": {
       "defaultExtension": "js"
     }
   };
@@ -58,7 +62,8 @@
     packages: packages,
     paths: {
       "ng2-bootstrap/ng2-bootstrap":   "node_modules/ng2-bootstrap/ng2-bootstrap",
-      'moment': 'node_modules/moment/moment.js'
+      'moment': 'node_modules/moment/moment.js',
+      'ng2-cookies/ng2-cookies': 'node_modules/ng2-cookies/ng2-cookies.js',
     }
   }
 

@@ -7,6 +7,8 @@ import { LoginComponent } from './login.component';
 import {AppService} from "./service/app.service"
 import {AuthService} from './service/loginService';
 import { CollapseDirective} from "ng2-bootstrap/ng2-bootstrap";
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+
 
 
 
@@ -55,18 +57,18 @@ export class RouteComponent implements OnInit {
     title = 'ng2 blog';
     private name:string;
     public isCollapsed:boolean = false;
+    public myCookie = Cookie.get('loginRecord');
 
     constructor(public _router:Router, private _authService:AuthService){
       this._router.subscribe((val) => {
         this.isCollapsed = false;
-        console.log(_authService.isLoggedin)
-        //if(!_authService.isLoggedin)
-        //  this._router.navigate(['Login']);
+        console.log(JSON.parse(this.myCookie))
       })
     }
 
     ngOnInit(): any {
         console.log(this._router)
+      console.log(JSON.parse(this.myCookie))
     }
 
     isActive(instruction: any[]): boolean {

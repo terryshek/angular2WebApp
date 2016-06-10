@@ -9,7 +9,7 @@ import {
   FORM_DIRECTIVES
 } from '@angular/common';
 
-import { UsernameValidator } from './validation/userValidator'
+import { UsernameValidator } from './validation/userValidator';
 
 @Component({
   directives:[FORM_DIRECTIVES],
@@ -47,18 +47,15 @@ import { UsernameValidator } from './validation/userValidator'
 
 export class LoginComponent implements OnInit {
   public loading:boolean = false;
-  public loggedIn :boolean;
   public username :any;
   public password :any;
   public form :any;
 
   ngOnInit():any {
     console.log("LoginComponent")
-    console.log(this.loggedIn)
   }
 
   constructor(private _service:AuthService, private _router: Router, private builder: FormBuilder) {
-    this.loggedIn = _service.isLoggedin
     this.username = new Control('', Validators.required);
     this.password = new Control('', Validators.required);
 
@@ -77,7 +74,6 @@ export class LoginComponent implements OnInit {
     this._service.loginfn(this.form.value).then((res) => {
       if(res){
         this._router.navigate(['Dashboard']);
-        this.loggedIn = true
       }
       else{
         console.log(res);
