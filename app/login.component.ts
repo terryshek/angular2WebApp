@@ -36,8 +36,8 @@ import { UsernameValidator } from './validation/userValidator'
         </div>
         <hr/>
         <button type="submit" (click)="login()" [disabled]="!form.valid" class="btn btn-default">
-          <div [hidden]="loggedIn">Login</div>
-          <div [hidden]="!loggedIn"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>&nbsp; loading ...</div>
+          <div [hidden]="loading">Login</div>
+          <div [hidden]="!loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>&nbsp; loading ...</div>
         </button>
       </form>
     </div>
@@ -46,7 +46,11 @@ import { UsernameValidator } from './validation/userValidator'
 })
 
 export class LoginComponent implements OnInit {
+  public loading:boolean = false;
   public loggedIn :boolean;
+  public username :any;
+  public password :any;
+  public form :any;
 
   ngOnInit():any {
     console.log("LoginComponent")
@@ -55,7 +59,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private _service:AuthService, private _router: Router, private builder: FormBuilder) {
     this.loggedIn = _service.isLoggedin
-    this.username = new Control('', Validators.required, UsernameValidator.checkIfAvailable);
+    this.username = new Control('', Validators.required);
     this.password = new Control('', Validators.required);
 
     this.form = builder.group({
@@ -69,14 +73,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loggedIn = true;
+    this.loading = true;
     this._service.loginfn(this.form.value).then((res) => {
-      if(res)
+      if(res){
         this._router.navigate(['Dashboard']);
-      else
+        this.loggedIn = true
+      }
+      else{
         console.log(res);
-
-      this.loggedIn = false;
+      }
+      this.loading = false;
     })
   }
 

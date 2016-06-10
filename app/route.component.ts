@@ -56,9 +56,12 @@ export class RouteComponent implements OnInit {
     private name:string;
     public isCollapsed:boolean = false;
 
-    constructor(public _router:Router){
+    constructor(public _router:Router, private _authService:AuthService){
       this._router.subscribe((val) => {
         this.isCollapsed = false;
+        console.log(_authService.isLoggedin)
+        //if(!_authService.isLoggedin)
+        //  this._router.navigate(['Login']);
       })
     }
 
