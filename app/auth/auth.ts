@@ -1,6 +1,6 @@
 import { ElementRef, DynamicComponentLoader, AttributeMetadata, Directive, Attribute } from '@angular/core';
 import { Router, RouterOutlet, ComponentInstruction } from '@angular/router-deprecated';
-import { AuthService as UserService } from './service/loginService';
+import { AuthService as UserService } from '../service/loginService';
 
 @Directive({
   selector: 'router-outlet'

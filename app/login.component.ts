@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
+import {Router, CanActivate, CanDeactivate} from '@angular/router-deprecated';
 import {AuthService} from './service/loginService';
 import {
   FormBuilder,
@@ -44,16 +44,20 @@ import { UsernameValidator } from './validation/userValidator';
     	`,
   styleUrls: ["./app/css/login.css"]
 })
+@CanActivate((next: ComponentInstruction, prev: ComponentInstruction)=>{
+  console.log("main")
+})
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements CanDeactivate {
+
+  routerCanDeactivate(nextInstruction:ComponentInstruction, prevInstruction:ComponentInstruction):any {
+    return confirm('Are you sure you want to leave?');
+  }
+
   public loading:boolean = false;
   public username :any;
   public password :any;
   public form :any;
-
-  ngOnInit():any {
-    console.log("LoginComponent")
-  }
 
   constructor(private _service:AuthService, private _router: Router, private builder: FormBuilder) {
     this.username = new Control('', Validators.required);
