@@ -1,17 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class AuthService {
-  private isLoggedin = false
+  private loggedIn = false;
 
-    constructor(private _http: Http) {
-      this.loggedIn = !!Cookie.get('loginRecord');
-    }
+  constructor(private _http: Http) {
+    this.loggedIn = !!Cookie.get('loginRecord');
+  }
 
   loginfn(usercreds:any){
     var headers = new Headers();
@@ -26,9 +25,9 @@ export class AuthService {
         .subscribe((res) => {
           console.log(res)
           if(res.status == 200) {
-            //console.log(data.json())
+            console.log(res)
+            this.loggedIn =true;
             Cookie.set('loginRecord', JSON.stringify({'loginIn':true,'this_id': res.this_profile["_id"]}), 10 /*days from now*/);
-            this.isLoggedin = true
           }
           resolve(res.status)
         },
@@ -45,6 +44,10 @@ export class AuthService {
 
   isLoggedIn() {
     return this.loggedIn;
+  }
+
+  check() {
+    return Observable.of(this.loggedIn);
   }
 
 

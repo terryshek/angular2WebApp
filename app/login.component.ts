@@ -45,14 +45,10 @@ import { UsernameValidator } from './validation/userValidator';
   styleUrls: ["./app/css/login.css"]
 })
 @CanActivate((next: ComponentInstruction, prev: ComponentInstruction)=>{
-  console.log("main")
+  return true
 })
 
-export class LoginComponent implements CanDeactivate {
-
-  routerCanDeactivate(nextInstruction:ComponentInstruction, prevInstruction:ComponentInstruction):any {
-    return confirm('Are you sure you want to leave?');
-  }
+export class LoginComponent {
 
   public loading:boolean = false;
   public username :any;

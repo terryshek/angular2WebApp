@@ -54,8 +54,9 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 ])
 
+export class RouteComponent {
 
-export class RouteComponent implements OnInit {
+
     title = 'ng2 blog';
     private name:string;
     public isCollapsed:boolean = false;
@@ -66,11 +67,6 @@ export class RouteComponent implements OnInit {
         this.isCollapsed = false;
         console.log(JSON.parse(this.myCookie))
       })
-    }
-
-    ngOnInit(): any {
-      console.log(this._router)
-      console.log(JSON.parse(this.myCookie))
     }
 
     isActive(instruction: any[]): boolean {
