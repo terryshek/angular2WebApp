@@ -17,7 +17,7 @@ import { UsernameValidator } from './validation/userValidator';
   providers:[AuthService],
   template: `
     <div class="container" style="padding-top: 80px" >
-      <form [ngFormModel]="form" class="login-screen text-center" (ngSubmit)="onSubmit()" novalidate>
+      <form [ngFormModel]="form" class="login-screen text-center box-shadow--16dp" (ngSubmit)="onSubmit()" novalidate>
         <h2>Login</h2>
         <hr>
         <div class="input-group name">
@@ -42,7 +42,7 @@ import { UsernameValidator } from './validation/userValidator';
       </form>
     </div>
     	`,
-  styleUrls: ["./app/css/login.css"]
+  styleUrls: ["./app/css/login.css", "./styles.css"]
 })
 @CanActivate((next: ComponentInstruction, prev: ComponentInstruction)=>{
   return true
