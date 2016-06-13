@@ -17,7 +17,7 @@ import { UsernameValidator } from './validation/userValidator';
   providers:[AuthService],
   template: `
     <div class="container" style="padding-top: 80px" >
-      <form [ngFormModel]="form" class="login-screen text-center" novalidate>
+      <form [ngFormModel]="form" class="login-screen text-center" (ngSubmit)="onSubmit()" novalidate>
         <h2>Login</h2>
         <hr>
         <div class="input-group name">
@@ -35,7 +35,7 @@ import { UsernameValidator } from './validation/userValidator';
             <p *ngIf="password.errors.required"><strong>Password is required.</strong></p>
         </div>
         <hr/>
-        <button type="submit" (click)="login()" [disabled]="!form.valid" class="btn btn-default">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-default">
           <div [hidden]="loading">Login</div>
           <div [hidden]="!loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>&nbsp; loading ...</div>
         </button>
@@ -69,10 +69,10 @@ export class LoginComponent implements OnInit {
     console.log(JSON.stringify(this.form.value))
   }
 
-  login() {
+  onSubmit(){
     this.loading = true;
     this._service.loginfn(this.form.value).then((res) => {
-      if(res){
+      if(res == 200){
         this._router.navigate(['Dashboard']);
       }
       else{

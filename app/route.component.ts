@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashbroad.component';
 import { LoginComponent } from './login.component';
+//directive
+//import {LoggedInRouterOutlet} from "./auth/auth";
 // service
 import {AppService} from "./service/app.service"
 import {AuthService} from './service/loginService';
@@ -67,11 +69,15 @@ export class RouteComponent implements OnInit {
     }
 
     ngOnInit(): any {
-        console.log(this._router)
+      console.log(this._router)
       console.log(JSON.parse(this.myCookie))
     }
 
     isActive(instruction: any[]): boolean {
       return this._router.isRouteActive(this._router.generate(instruction));
+    }
+
+    logout(){
+      this._authService.logout()
     }
 }
